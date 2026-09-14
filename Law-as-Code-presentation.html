@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="uz-Cyrl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Law as Code — йўл харита ва LegalTech Hackathon</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FFFFFF;
+  --panel:#F6F8FC;
+  --panel-2:#EEF3FA;
+  --line:#DCE4EF;
+  --line-strong:#C3D0E2;
+  --ink:#0B1726;
+  --ink-soft:#33475F;
+  --muted:#6C819C;
+  --blue:#1A56C4;
+  --blue-soft:#E7EEFB;
+  --teal:#0B7A68;
+  --teal-soft:#E4F4F1;
+  --gold:#8A5E0C;
+  --gold-fill:#E3A72A;
+  --gold-soft:#FBF2DF;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:'Golos Text','PT Sans','Noto Sans',system-ui,sans-serif;
+  font-size:17px;-webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+.deck{height:100svh;overflow-y:scroll;scroll-snap-type:y mandatory;scroll-behavior:smooth}
+.slide{
+  min-height:100svh;scroll-snap-align:start;scroll-snap-stop:always;
+  position:relative;display:flex;flex-direction:column;justify-content:center;
+  padding:clamp(30px,3.4vw,56px) clamp(22px,5vw,80px) clamp(58px,5vw,76px);
+  border-bottom:1px solid var(--line);overflow:hidden;
+}
+.slide::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+  background-size:64px 64px;opacity:.7;
+  mask-image:radial-gradient(120% 90% at 88% 6%,#000 0%,transparent 70%);
+}
+.slide>*{position:relative;z-index:1}
+
+.meta{
+  display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;
+  font-family:'JetBrains Mono',monospace;font-size:14px;
+  color:var(--muted);margin-bottom:clamp(16px,2.2vw,30px);
+}
+.meta b{color:var(--blue);font-weight:700}
+.p2 .meta b{color:var(--gold)}
+.meta span{color:var(--line-strong)}
+
+h1{font-size:clamp(48px,8.6vw,128px);line-height:.92;letter-spacing:-.035em;font-weight:800;margin:0}
+h2{font-size:clamp(28px,3.3vw,46px);line-height:1.05;letter-spacing:-.025em;font-weight:800;margin:0 0 .36em;max-width:22ch}
+h3{font-size:clamp(18px,1.45vw,22px);line-height:1.2;letter-spacing:-.012em;font-weight:700;margin:0}
+p{margin:0;line-height:1.5}
+.dim{color:var(--muted)}
+.mono{font-family:'JetBrains Mono',monospace}
+
+/* 1 — титул */
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(28px,4vw,64px);align-items:center}
+.hero-sub{margin-top:24px;font-size:clamp(19px,1.6vw,25px);color:var(--ink-soft);max-width:38ch;line-height:1.4}
+.rule{height:1px;background:var(--line-strong);margin:clamp(26px,3vw,40px) 0 22px}
+.parts{display:grid;grid-template-columns:1fr 1fr;gap:22px;max-width:680px}
+.part{border-top:3px solid var(--blue);padding-top:14px}
+.part.gold{border-color:var(--gold-fill)}
+.part .k{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--blue);letter-spacing:.06em;font-weight:700}
+.part.gold .k{color:var(--gold)}
+.part .t{font-weight:700;font-size:clamp(18px,1.45vw,22px);margin:7px 0 5px;letter-spacing:-.01em}
+.part .d{font-size:15.5px;color:var(--muted);line-height:1.42}
+
+/* 2 — йўналишлар */
+.stats{display:flex;gap:clamp(22px,2.6vw,48px);flex-wrap:wrap;margin-bottom:clamp(14px,1.7vw,24px);align-items:flex-start}
+.stat .n{font-size:clamp(28px,3vw,40px);font-weight:800;letter-spacing:-.04em;line-height:1}
+.stat .n em{font-style:normal;color:var(--blue)}
+.stat .l{font-size:14px;color:var(--muted);margin-top:5px;max-width:22ch;line-height:1.32}
+.tracks{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,1.6vw,24px)}
+.track{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:clamp(15px,1.3vw,20px);display:flex;flex-direction:column;gap:11px}
+.track .top{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.ic{width:40px;height:40px;flex:none;color:var(--blue);border:1px solid var(--line-strong);border-radius:11px;padding:9px;background:var(--blue-soft)}
+.p2 .ic{color:var(--gold);background:var(--gold-soft);border-color:#E8D5A8}
+.track .idx{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--muted)}
+.track ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px}
+.track li{font-size:15px;line-height:1.36;color:var(--ink-soft);padding-left:17px;position:relative}
+.track li::before{content:"";position:absolute;left:0;top:.62em;width:8px;height:2px;background:var(--blue);border-radius:1px}
+.track li b{color:var(--ink);font-weight:700}
+.track .out{margin-top:auto;padding-top:11px;border-top:1px dashed var(--line-strong);font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--teal);line-height:1.4}
+
+/* 3 — тақвим */
+.tl{display:grid;grid-template-columns:repeat(6,1fr);gap:clamp(10px,1vw,16px);align-items:start}
+.col{display:flex;flex-direction:column;gap:10px}
+.mon{font-family:'JetBrains Mono',monospace;font-size:13.5px;color:var(--muted);padding-bottom:8px;border-bottom:2px solid var(--line-strong);display:flex;justify-content:space-between;gap:6px}
+.mon i{font-style:normal;color:var(--blue)}
+.ev{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--blue);border-radius:0 11px 11px 0;padding:11px 12px}
+.ev.mile{border-left-color:var(--teal);background:var(--teal-soft)}
+.ev .d{font-family:'JetBrains Mono',monospace;font-size:12.5px;color:var(--muted)}
+.ev .t{font-size:15px;font-weight:700;line-height:1.28;margin:5px 0 5px;letter-spacing:-.01em}
+.ev .r{font-size:13px;color:var(--teal);line-height:1.3}
+.tlfoot{margin-top:clamp(16px,2vw,26px);display:flex;gap:24px;flex-wrap:wrap;font-size:14.5px;color:var(--muted);align-items:center}
+.tlfoot span{display:flex;align-items:center;gap:8px}
+.sw{width:11px;height:11px;border-radius:3px;background:var(--blue)}
+.sw.t{background:var(--teal)}
+
+/* 4 — муаммолар + ечимлар */
+.probs{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(13px,1.4vw,22px)}
+.prob{display:grid;grid-template-columns:auto 1fr;gap:15px;align-items:stretch;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:clamp(14px,1.25vw,19px)}
+.rail{display:flex;flex-direction:column;align-items:center;gap:12px;height:100%}
+.rail .num{font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;color:#3D2A00;background:var(--gold-fill);width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center}
+.rail .ic{width:38px;height:38px;padding:8px}
+.rail .stem{flex:1;width:2px;min-height:14px;background:var(--line-strong);border-radius:1px}
+.prob h3{margin-bottom:9px}
+.prob h3 span{color:var(--gold);font-weight:700}
+.block{display:flex;gap:9px;margin-bottom:7px}
+.block .lab{font-family:'JetBrains Mono',monospace;font-size:12.5px;color:var(--muted);flex:none;width:52px;padding-top:2px}
+.block p{font-size:15px;line-height:1.42;color:var(--ink-soft)}
+.block.sol p{color:var(--ink)}
+.tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:9px;padding-top:9px;border-top:1px dashed var(--line-strong)}
+.tag{font-family:'JetBrains Mono',monospace;font-size:12.5px;color:var(--teal);border:1px solid #B9DFD8;background:var(--teal-soft);padding:3px 8px;border-radius:7px}
+.tag.m{color:var(--gold);border-color:#E8D5A8;background:var(--gold-soft)}
+
+/* навигация */
+.nav{position:fixed;right:16px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:12px;z-index:50}
+.nav a{width:10px;height:10px;border-radius:50%;border:1px solid var(--line-strong);background:#fff;transition:background .2s,transform .2s}
+.nav a.on{background:var(--blue);transform:scale(1.35);border-color:var(--blue)}
+.nav a.on.g{background:var(--gold-fill);border-color:var(--gold-fill)}
+.pager{position:fixed;left:clamp(22px,5vw,80px);bottom:20px;z-index:50;font-family:'JetBrains Mono',monospace;font-size:13.5px;color:var(--muted)}
+.pager b{color:var(--ink);font-weight:700}
+.brand{position:fixed;right:clamp(34px,5vw,92px);bottom:20px;z-index:50;font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--line-strong)}
+
+/* hero иллюстрация */
+.figure{width:100%;height:auto;max-height:58svh}
+.pen{stroke-dasharray:180;stroke-dashoffset:180;animation:draw 1.1s .35s ease forwards}
+.pop{opacity:0;animation:pop .5s ease forwards}
+.pop:nth-of-type(1){animation-delay:.9s}
+.pop:nth-of-type(2){animation-delay:1.05s}
+.pop:nth-of-type(3){animation-delay:1.2s}
+.pop:nth-of-type(4){animation-delay:1.35s}
+@keyframes draw{to{stroke-dashoffset:0}}
+@keyframes pop{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.pen,.pop{animation:none;stroke-dashoffset:0;opacity:1}html,.deck{scroll-behavior:auto}}
+
+@media (max-width:1150px){
+  .hero{grid-template-columns:1fr}
+  .figure{max-height:32svh;order:-1}
+  .tracks{grid-template-columns:1fr}
+  .track .out{display:none}
+  .tl{grid-template-columns:repeat(3,1fr)}
+  .slide{justify-content:flex-start;padding-top:60px}
+}
+@media (max-width:760px){
+  body{font-size:16px}
+  .parts,.probs,.tl{grid-template-columns:1fr}
+  .nav,.brand{display:none}
+  .slide{min-height:auto}
+  .deck{scroll-snap-type:none}
+}
+@media print{
+  .deck{height:auto;overflow:visible}
+  .slide{page-break-after:always;min-height:0;border:none}
+  .nav,.pager,.brand{display:none}
+}
+</style>
+</head>
+<body>
+
+<div class="deck" id="deck">
+
+<!-- ═════ 1 ═════ -->
+<section class="slide" id="s1">
+  <div class="meta"><b>Ўзбекистон Республикаси Адлия вазирлиги</b><span>·</span>2026–2027</div>
+
+  <div class="hero">
+    <div>
+      <h1>Law as&nbsp;Code</h1>
+      <p class="hero-sub">Ҳуқуқий нормаларни машина ўқий оладиган кўринишга ўтказиш: жорий этиш йўл харитаси ва биринчи LegalTech Hackathon муаммолари.</p>
+
+      <div class="rule"></div>
+
+      <div class="parts">
+        <div class="part">
+          <div class="k">I ҚИСМ</div>
+          <div class="t">Йўл харита</div>
+          <div class="d">15 чора-тадбир, уч йўналиш. 15.09.2026 — 15.02.2027</div>
+        </div>
+        <div class="part gold">
+          <div class="k">II ҚИСМ</div>
+          <div class="t">Hackathon муаммолари</div>
+          <div class="d">Тўрт йўналиш, тўрт ментор, очиқ давлат тизимлари</div>
+        </div>
+      </div>
+    </div>
+
+    <svg class="figure" viewBox="0 0 460 330" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Ҳуқуқий матннинг машина ўқийдиган қоидаларга айланиши">
+      <rect x="14" y="34" width="160" height="262" rx="10" fill="#F6F8FC" stroke="#C3D0E2"/>
+      <rect x="34" y="60" width="82" height="8" rx="4" fill="#1A56C4"/>
+      <g fill="#9DB0C8">
+        <rect x="34" y="86" width="120" height="6" rx="3"/>
+        <rect x="34" y="102" width="104" height="6" rx="3"/>
+        <rect x="34" y="118" width="118" height="6" rx="3"/>
+        <rect x="34" y="144" width="96" height="6" rx="3"/>
+        <rect x="34" y="160" width="120" height="6" rx="3"/>
+        <rect x="34" y="176" width="72" height="6" rx="3"/>
+        <rect x="34" y="202" width="116" height="6" rx="3"/>
+        <rect x="34" y="218" width="88" height="6" rx="3"/>
+        <rect x="34" y="244" width="120" height="6" rx="3"/>
+        <rect x="34" y="260" width="66" height="6" rx="3"/>
+      </g>
+      <path class="pen" d="M182 165 H262" stroke="#0B7A68" stroke-width="2.5" stroke-linecap="round"/>
+      <path d="M256 158 l9 7 -9 7" stroke="#0B7A68" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <text x="222" y="148" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="12" fill="#0B7A68">rulemap</text>
+      <g class="pop">
+        <rect x="278" y="44" width="168" height="52" rx="10" fill="#E4F4F1" stroke="#8FCFC3"/>
+        <circle cx="298" cy="70" r="6" fill="#0B7A68"/>
+        <rect x="312" y="60" width="104" height="7" rx="3.5" fill="#33475F"/>
+        <rect x="312" y="76" width="70" height="6" rx="3" fill="#9DB0C8"/>
+      </g>
+      <g class="pop">
+        <rect x="278" y="108" width="168" height="52" rx="10" fill="#E7EEFB" stroke="#9BB8E8"/>
+        <path d="M293 125 l-6 8 6 8" stroke="#1A56C4" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        <path d="M303 125 l6 8 -6 8" stroke="#1A56C4" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        <rect x="320" y="124" width="96" height="7" rx="3.5" fill="#33475F"/>
+        <rect x="320" y="140" width="58" height="6" rx="3" fill="#9DB0C8"/>
+      </g>
+      <g class="pop">
+        <rect x="278" y="172" width="168" height="52" rx="10" fill="#FBF2DF" stroke="#E3C583"/>
+        <rect x="289" y="184" width="16" height="16" rx="4" stroke="#8A5E0C" stroke-width="2.2" fill="none"/>
+        <path d="M292.5 192 l3.2 3.2 6 -6.4" stroke="#8A5E0C" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        <rect x="320" y="188" width="88" height="7" rx="3.5" fill="#33475F"/>
+        <rect x="320" y="204" width="76" height="6" rx="3" fill="#9DB0C8"/>
+      </g>
+      <g class="pop">
+        <rect x="278" y="236" width="168" height="52" rx="10" fill="#F6F8FC" stroke="#C3D0E2"/>
+        <path d="M290 254 h17 M290 263 h11" stroke="#9DB0C8" stroke-width="2.5" stroke-linecap="round"/>
+        <rect x="320" y="252" width="102" height="7" rx="3.5" fill="#6C819C"/>
+        <rect x="320" y="268" width="48" height="6" rx="3" fill="#C3D0E2"/>
+      </g>
+    </svg>
+  </div>
+</section>
+
+<!-- ═════ 2 ═════ -->
+<section class="slide" id="s2">
+  <div class="meta"><b>I қисм · Йўл харита</b><span>·</span>Уч йўналиш, 15 чора-тадбир</div>
+
+  <h2>Ўрганишдан платформагача</h2>
+
+  <div class="stats">
+    <div class="stat"><div class="n"><em>15</em></div><div class="l">чора-тадбир</div></div>
+    <div class="stat"><div class="n"><em>3</em></div><div class="l">йўналиш</div></div>
+    <div class="stat"><div class="n"><em>6</em></div><div class="l">хорижий тажриба манбаси</div></div>
+    <div class="stat"><div class="n">15.09<span class="dim">.26</span> → 15.02<span class="dim">.27</span></div><div class="l">лойиҳа офисидан тизим интеграциясигача</div></div>
+  </div>
+
+  <div class="tracks">
+    <div class="track">
+      <div class="top">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 3 2 8l10 5 10-5-10-5Z"/><path d="M5 10.5V16c0 1.7 3.1 3 7 3s7-1.3 7-3v-5.5"/>
+        </svg>
+        <div class="idx">1 — 6</div>
+      </div>
+      <h3>Ташкилий ва ўқув масалалари</h3>
+      <ul>
+        <li><b>Лойиҳа офиси:</b> вазирлик ходимларидан иборат, асосий ишдан озод этилган гуруҳ</li>
+        <li><b>TWINNING:</b> Германия мутахассислари билан онлайн машғулотлар</li>
+        <li><b>Хорижий тажриба:</b> OECD, Better Rules (Янги Зеландия), GovCMS (Австралия), OpenFisca (Франция), АҚШ лойиҳалари, Rulemapping (Германия)</li>
+        <li><b>CLDP:</b> молиялаштириш дастурига лойиҳа таклифи ва хизмат сафари</li>
+      </ul>
+      <div class="out">→ миллий модель ва чора-тадбирлар дастури</div>
+    </div>
+
+    <div class="track">
+      <div class="top">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M9 4 3 6.5v13L9 17l6 2.5 6-2.5v-13L15 6.5 9 4Z"/><path d="M9 4v13M15 6.5v13"/>
+        </svg>
+        <div class="idx">7 — 10</div>
+      </div>
+      <h3>Методология ва норматив хариталар</h3>
+      <ul>
+        <li><b>Пилотларни танлаш:</b> частота, ижтимоий аҳамият, қоидалар аниқлиги бўйича баҳолаш; устувор — нотариат</li>
+        <li><b>Методика 0.1:</b> харита шакли, идентификаторлар, шартлар, истиснолар, муддатлар</li>
+        <li><b>Маълумотлар луғати:</b> онтология, XML/XSD профили ва версиялаш қоидалари</li>
+        <li><b>Микропилот:</b> битта норма блокини моделлаштириш</li>
+      </ul>
+      <div class="out">→ методиканинг 0.1 версияси ва тайёр Rulemap</div>
+    </div>
+
+    <div class="track">
+      <div class="top">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="2.5" y="4" width="19" height="16" rx="2.5"/><path d="M2.5 8.5h19"/><path d="M8 12.5l-2 2 2 2M12.5 12.5l2 2-2 2"/>
+        </svg>
+        <div class="idx">11 — 15</div>
+      </div>
+      <h3>Rulemapping платформаси</h3>
+      <ul>
+        <li><b>Техник топшириқ:</b> визуал муҳаррир, Lex.uz билан боғлиқлик, роллар, реестр, версиялар, XML экспорти, API</li>
+        <li><b>Rulemapping Studio MVP:</b> ишлайдиган версияни қабул қилиш</li>
+        <li><b>Пилот:</b> вазирлик хизматини rulemap кўринишига ўтказиш</li>
+        <li><b>Кенгайтириш:</b> миллий стандарт таклифлари ва беш йиллик режа</li>
+      </ul>
+      <div class="out">→ loyiha.adliya.uz га интеграция</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════ 3 ═════ -->
+<section class="slide" id="s3">
+  <div class="meta"><b>I қисм · Тақвим</b><span>·</span>15.09.2026 — 15.02.2027</div>
+
+  <h2>Беш ой, ўн беш қадам</h2>
+
+  <div class="tl">
+    <div class="col">
+      <div class="mon"><span>Сентябр</span><i>2026</i></div>
+      <div class="ev"><div class="d">15.09</div><div class="t">Лойиҳа офисини ташкил этиш</div><div class="r">вазир буйруғи</div></div>
+      <div class="ev"><div class="d">21.09</div><div class="t">CLDP дастурига лойиҳа таклифи</div><div class="r">молиялаштириш сўрови</div></div>
+      <div class="ev"><div class="d">28.09</div><div class="t">Хорижий тажрибани ўрганиш</div><div class="r">қиёсий жадвал</div></div>
+      <div class="ev"><div class="d">28–29.09</div><div class="t">TWINNING: Германия билан онлайн машғулот</div><div class="r">таҳлилий материаллар</div></div>
+    </div>
+
+    <div class="col">
+      <div class="mon"><span>Октябр</span><i>2026</i></div>
+      <div class="ev"><div class="d">19.10</div><div class="t">Янги Зеландия, Австралия ва Германияга хизмат сафари</div><div class="r">тажриба ўрганиш</div></div>
+      <div class="ev mile"><div class="d">26.10</div><div class="t">Миллий модель ва чора-тадбирлар дастури</div><div class="r">асосий босқич</div></div>
+      <div class="ev"><div class="d">28.10</div><div class="t">Пилотларни танлаш ва баҳолаш</div><div class="r">микропилот</div></div>
+    </div>
+
+    <div class="col">
+      <div class="mon"><span>Ноябр</span><i>2026</i></div>
+      <div class="ev"><div class="d">02.11</div><div class="t">Платформа учун техник топшириқ</div><div class="r">ТТ ва молиялаштириш модели</div></div>
+      <div class="ev"><div class="d">09.11</div><div class="t">Rulemapping методикаси</div><div class="r">0.1 версия, Rulemap намунаси</div></div>
+      <div class="ev"><div class="d">16.11</div><div class="t">Маълумотлар луғати ва алмашинув формати</div><div class="r">онтология, XML/XSD</div></div>
+    </div>
+
+    <div class="col">
+      <div class="mon"><span>Декабр</span><i>2026</i></div>
+      <div class="ev"><div class="d">01.12</div><div class="t">Микропилотни амалга ошириш</div><div class="r">тайёр Rulemap</div></div>
+      <div class="ev mile"><div class="d">02.12</div><div class="t">Rulemapping Studio MVP</div><div class="r">ишлайдиган платформа</div></div>
+    </div>
+
+    <div class="col">
+      <div class="mon"><span>Январ</span><i>2027</i></div>
+      <div class="ev mile"><div class="d">04.01</div><div class="t">Адлия вазирлиги хизмати бўйича пилот</div><div class="r">хизмат rulemap кўринишида</div></div>
+      <div class="ev"><div class="d">15.01</div><div class="t">Доимий қўллаб-қувватлаш ва кенгайтириш</div><div class="r">беш йиллик режа</div></div>
+    </div>
+
+    <div class="col">
+      <div class="mon"><span>Феврал</span><i>2027</i></div>
+      <div class="ev mile"><div class="d">15.02</div><div class="t">«Law as Code» тизимини loyiha.adliya.uz га улаш</div><div class="r">тизим интеграцияси</div></div>
+    </div>
+  </div>
+
+  <div class="tlfoot">
+    <span><i class="sw"></i> жорий чора-тадбир</span>
+    <span><i class="sw t"></i> асосий босқич</span>
+    <span class="mono dim">Ижрочи: лойиҳа офиси · Адлия вазирлиги</span>
+  </div>
+</section>
+
+<!-- ═════ 4 ═════ -->
+<section class="slide p2" id="s4">
+  <div class="meta"><b>II қисм · Биринчи LegalTech Hackathon</b><span>·</span>Муаммолар ва кутилаётган ечимлар</div>
+
+  <h2 style="max-width:none">Тўртта муаммо, тўртта ечим</h2>
+
+  <div class="probs">
+    <div class="prob">
+      <div class="rail">
+        <div class="num">1</div>
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="2.5" y="4.5" width="19" height="15" rx="2.5"/><path d="M2.5 9h19"/><path d="M7 13h6M7 16h4"/>
+        </svg>
+        <div class="stem"></div>
+      </div>
+      <div>
+        <h3>«Рақамли юридик офис» <span>— ягона иш муҳити</span></h3>
+        <div class="block"><div class="lab">Муаммо</div><p>Юрист ва адвокатлар Due diligence, қонунчиликни ўрганиш ва ҳужжат тайёрлашда турли манбаларга бўлиниб кетган; ишлар ва муддатлар тарқоқлиги хатоларга олиб келмоқда.</p></div>
+        <div class="block sol"><div class="lab">Ечим</div><p>Ягона кабинет: ҳуқуқий таҳлил, шартномаларни ақлли тузиш, хавфларни аниқлаш, муддатларни кузатиш ва смарт-контрактлар.</p></div>
+        <div class="tags">
+          <span class="tag">lex.uz</span><span class="tag">e-huquqshunos</span><span class="tag">e-advokat</span><span class="tag">e-notarius</span><span class="tag">birdarcha.uz</span>
+          <span class="tag m">Ментор: И. Сабурязов</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="prob">
+      <div class="rail">
+        <div class="num">2</div>
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="9"/><path d="M15.5 8.5 13.8 13.8 8.5 15.5l1.7-5.3 5.3-1.7Z"/>
+        </svg>
+        <div class="stem"></div>
+      </div>
+      <div>
+        <h3>«Бизнес навигатор» <span>— тадбиркор йўлхаритаси</span></h3>
+        <div class="block"><div class="lab">Муаммо</div><p>Тадбиркор қандай мажбурий талаблар татбиқ этилишини, қайси рухсатнома зарурлигини ва ҳисоботларни қачон топширишни аниқлай олмаяпти.</p></div>
+        <div class="block sol"><div class="lab">Ечим</div><p>Фаолият тури ва ҳудудига қараб талабларни аниқлаб, босқичма-босқич йўриқнома, ҳисобот тақвими ва ўзгаришлар ҳақида эслатма берадиган навигатор.</p></div>
+        <div class="tags">
+          <span class="tag">lex.uz</span><span class="tag">birdarcha.uz</span><span class="tag">reestr.gov.uz</span>
+          <span class="tag m">Ментор: У. Жаксимуратов</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="prob">
+      <div class="rail">
+        <div class="num">3</div>
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M3 5.5h8v7H6l-3 3v-10Z"/><path d="M13 9.5h8v10l-3-3h-5v-7Z"/>
+        </svg>
+        <div class="stem"></div>
+      </div>
+      <div>
+        <h3>«Рақамли медиация» <span>— низолар платформаси</span></h3>
+        <div class="block"><div class="lab">Муаммо</div><p>Мурожаат, медиатор танлаш, ҳужжат алмашиш, масофавий музокара ва натижаларни қайд этиш ягона тизимга бирлаштирилмаган.</p></div>
+        <div class="block sol"><div class="lab">Ечим</div><p>Барча босқичларни бирлаштирувчи платформа; сунъий интеллект низони таҳлил қилади, нормаларни топади ва келишув вариантларини таклиф этади.</p></div>
+        <div class="tags">
+          <span class="tag">lex.uz</span><span class="tag">birdarcha.uz</span><span class="tag">e-advokat</span>
+          <span class="tag m">Ментор: Ф. Зарипов</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="prob">
+      <div class="rail">
+        <div class="num">4</div>
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="9"/><path d="M14.8 9.6a3.6 3.6 0 1 0 0 4.8"/>
+        </svg>
+        <div class="stem"></div>
+      </div>
+      <div>
+        <h3>«E-Muallif» <span>— шаффоф ҳисоб-китоб</span></h3>
+        <div class="block"><div class="lab">Муаммо</div><p>Муаллифлик ҳақини ҳисоблаш, йиғиш ва тақсимлаш ягона электрон тизимда юритилмаяпти; ҳуқуқ эгалари тўловларни текшира олмайди.</p></div>
+        <div class="block sol"><div class="lab">Ечим</div><p>Ҳуқуқ объектлари ва фойдаланиш маълумотларини бирлаштирувчи платформа: шахсий кабинетда тўловлар назорати ва «AI маслаҳатчи».</p></div>
+        <div class="tags">
+          <span class="tag">lex.uz</span><span class="tag">birdarcha.uz</span><span class="tag">im.adliya.uz</span>
+          <span class="tag m">Ментор: Ш. Абдумаликов</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</div>
+
+<nav class="nav" aria-label="Слайдлар">
+  <a href="#s1" aria-label="1-слайд"></a>
+  <a href="#s2" aria-label="2-слайд"></a>
+  <a href="#s3" aria-label="3-слайд"></a>
+  <a href="#s4" aria-label="4-слайд"></a>
+</nav>
+<div class="pager"><b id="cur">01</b> / 04 &nbsp;·&nbsp; <span id="partlbl">I қисм — Йўл харита</span></div>
+<div class="brand">← → навигация</div>
+
+<script>
+(function(){
+  var deck=document.getElementById('deck');
+  var slides=[].slice.call(document.querySelectorAll('.slide'));
+  var dots=[].slice.call(document.querySelectorAll('.nav a'));
+  var cur=document.getElementById('cur'), lbl=document.getElementById('partlbl');
+  var labels=['I қисм — Йўл харита','I қисм — Йўл харита','I қисм — Йўл харита','II қисм — Hackathon'];
+  var idx=0;
+  function setActive(i){
+    idx=i;
+    dots.forEach(function(d,j){d.classList.toggle('on',j===i);d.classList.toggle('g',i>=3);});
+    cur.textContent=String(i+1).padStart(2,'0');
+    lbl.textContent=labels[i];
+  }
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){
+      es.forEach(function(e){if(e.isIntersecting) setActive(slides.indexOf(e.target));});
+    },{root:deck,threshold:.55});
+    slides.forEach(function(s){io.observe(s);});
+  }
+  setActive(0);
+  function go(i){if(i<0||i>=slides.length)return;slides[i].scrollIntoView({behavior:'smooth',block:'start'});}
+  document.addEventListener('keydown',function(e){
+    if(e.key==='ArrowRight'||e.key==='PageDown'||e.key===' '){e.preventDefault();go(idx+1);}
+    if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();go(idx-1);}
+    if(e.key==='Home'){e.preventDefault();go(0);}
+    if(e.key==='End'){e.preventDefault();go(slides.length-1);}
+  });
+})();
+</script>
+</body>
+</html>
