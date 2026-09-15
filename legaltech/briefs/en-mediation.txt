@@ -1,0 +1,16 @@
+LegalTech Hackathon
+
+Digital Mediation
+One platform for dispute resolution
+
+The problem
+Access to mediation, mediator selection, document exchange, remote negotiations and recording outcomes are not connected in a single digital system. Initial dispute analysis and preparing settlement options take considerable time.
+
+Expected solution
+A platform connects all mediation stages and generates statistics. AI assists with analysing disputes, finding relevant legal provisions and developing possible settlement terms.
+
+Organizers
+Ministry of Justice
+of the Republic of Uzbekistan
+Ministry of Digital Technologies
+of the Republic of Uzbekistan

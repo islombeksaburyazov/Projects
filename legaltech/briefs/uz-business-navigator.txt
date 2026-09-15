@@ -1,0 +1,16 @@
+LegalTech Hackathon
+
+Biznes navigator
+Tadbirkor uchun shaxsiy huquqiy yo‘l xaritasi
+
+Muammo
+Tadbirkorlar biznesni ro‘yxatdan o‘tkazgach, faoliyatiga qanday majburiy talablar tatbiq etilishi, qaysi ruxsatnoma yoki litsenziyalar zarurligi, hisobotlarni kimga, qachon va qanday topshirish kerakligini aniqlashda qiynalmoqda. Ma’lumotlarning tarqoqligi talablarni o‘tkazib yuborish va ortiqcha xarajatlarga olib kelmoqda.
+
+Kutilayotgan yechim
+Faoliyat turi, hududi va boshqa xususiyatlarga qarab biznesning majburiy talablarini aniqlaydigan hamda bosqichma-bosqich yo‘riqnoma beradigan raqamli navigator. Tizim hisobotlar va to‘lovlar taqvimini shakllantiradi, muddatlar va qonunchilikdagi tegishli o‘zgarishlar haqida eslatadi.
+
+Tashkilotchilar
+O‘zbekiston Respublikasi
+Adliya vazirligi
+O‘zbekiston Respublikasi
+Raqamli texnologiyalar vazirligi

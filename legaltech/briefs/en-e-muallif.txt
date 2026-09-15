@@ -1,0 +1,16 @@
+LegalTech Hackathon
+
+E–Muallif
+Transparent royalty calculation and distribution
+
+The problem
+Without a single electronic system for calculating, collecting and distributing copyright and related-rights royalties, rights holders find it difficult to track funds and verify payment accuracy.
+
+Expected solution
+A platform connects rights, rights holders and usage data, and digitizes royalty calculation, collection and distribution. Rights holders can track calculations and payments in a personal account and receive legal explanations from an AI assistant.
+
+Organizers
+Ministry of Justice
+of the Republic of Uzbekistan
+Ministry of Digital Technologies
+of the Republic of Uzbekistan

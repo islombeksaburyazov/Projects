@@ -1,0 +1,16 @@
+LegalTech Hackathon
+
+Business Navigator
+A personalized legal roadmap for business
+
+The problem
+After registering a business, entrepreneurs struggle to identify applicable requirements, necessary licences and permits, and where, when and how to submit reports. Scattered information leads to missed requirements and additional costs.
+
+Expected solution
+A digital navigator identifies obligations based on the business activity, location and other characteristics. It provides step-by-step guidance, creates a reporting and payment calendar, and sends reminders about deadlines and relevant legislative changes.
+
+Organizers
+Ministry of Justice
+of the Republic of Uzbekistan
+Ministry of Digital Technologies
+of the Republic of Uzbekistan

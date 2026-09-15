@@ -1,0 +1,16 @@
+LegalTech Hackathon
+
+Digital Legal Office
+One workspace for legal professionals
+
+The problem
+Lawyers use disconnected sources and tools for due diligence, legal research and drafting applications, court claims and other legal documents. Fragmented case, document and deadline management wastes time and increases errors.
+
+Expected solution
+An intelligent platform for case management, legal analysis and document preparation in one workspace. It supports tailored contract drafting, legal risk identification, deadline tracking and execution of automatable terms through smart contracts.
+
+Organizers
+Ministry of Justice
+of the Republic of Uzbekistan
+Ministry of Digital Technologies
+of the Republic of Uzbekistan

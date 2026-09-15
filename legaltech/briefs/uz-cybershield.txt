@@ -1,0 +1,16 @@
+LegalTech Hackathon
+
+Kiberhimoya
+Kiberfiribgarlikdan jabrlanganlarga huquqiy yordam
+
+Muammo
+Telefon, internet yoki boshqa raqamli vositalar orqali firibgarlikka uchragan fuqarolar qaysi davlat organiga, qanday tartibda va qanday ma’lumotlar bilan murojaat qilishni bilmasligi mumkin. Voqeani bayon etish, dalillarni to‘plash va ariza tayyorlashdagi qiyinchiliklar murojaatning kechikishiga olib keladi.
+
+Kutilayotgan yechim
+Sun’iy intellektga asoslangan chatbot fuqaroning holatini oddiy muloqot orqali qabul qiladi, aniqlashtiruvchi savollar bilan zarur ma’lumot va dalillarni jamlaydi hamda ariza loyihasini avtomatik tayyorlaydi. Fuqaro arizani tekshirib tasdiqlaganidan so‘ng, tizim rasmiy elektron kanallar bilan integratsiya orqali uni vakolatli organga yuboradi va murojaat holatini kuzatish imkonini beradi.
+
+Tashkilotchilar
+O‘zbekiston Respublikasi
+Adliya vazirligi
+O‘zbekiston Respublikasi
+Raqamli texnologiyalar vazirligi
